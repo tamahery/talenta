@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talenta Food - Splash</title>
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+  <!-- SPLASH SCREEN -->
+  <div class="splash" id="splash">
+    <img src="logo.png" alt="Talenta Food Logo" class="logo" />
+    <i class="fas fa-spinner fa-spin spinner"></i>
+    <h1 class="font-cursive text-red-600 title">Talenta Food</h1>
+    <p class="slogan">Sakafo malagasy matsiro</p>
+  </div>
+
+  <!-- MAIN APP PAGE -->
+  <div class="page" id="mainPage">
+    <h2 class="font-cursive text-green-600" style="font-size: 30px;">Kajy tombom-barotra isam-bolana</h2>
+    <label>Vola nomanina (Ar):</label>
+    <input type="number" id="volaNomanina" placeholder="Ohatra: 100000" />
+
+    <label>Isan'ny lafo isan'andro:</label>
+    <input type="number" id="isanLafo" placeholder="Ohatra: 30" />
+
+    <button onclick="kalkule()">Kajy Tombom-barotra</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    // Splash redirect after 1.5s
+    setTimeout(() => {
+      document.getElementById('splash').style.display = 'none';
+      document.getElementById('mainPage').classList.add('active');
+    }, 1500);
+
+    function kalkule() {
+      const volaNomanina = parseFloat(document.getElementById("volaNomanina").value);
+      const isanLafo = parseInt(document.getElementById("isanLafo").value);
+      const vidinSakafo = 1000;
+
+      if (isNaN(volaNomanina) || isNaN(isanLafo)) {
+        document.getElementById("result").innerText = "Fenoy tsara ny saha roa.";
+        return;
+      }
+
+      const androMiasa = 22;
+      const volaAzo = isanLafo * vidinSakafo * androMiasa;
+      const tombony = volaAzo - volaNomanina;
+
+      document.getElementById("result").innerHTML = `
+        💰 Vola azo: ${volaAzo.toLocaleString()} Ar<br>
+        📈 Tombony: ${tombony.toLocaleString()} Ar
+      `;
+    }
+  </script>
+</body>
+</html>
